@@ -21,12 +21,12 @@ class HallAdmin(admin.ModelAdmin):
     search_fields = ['name', 'id']
 
 class SeatAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'position']
+    list_display = ['pk', 'hall_name', 'line', 'position']
     ordering = ['pk']
     search_fields = ['position', 'id']
 
 class ShowAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'movie_name']
+    list_display = ['pk', 'movie_name', 'hall_name', 'start_date', 'finish_date', 'price']
     ordering = ['pk']
     search_fields = ['movie_name', 'id']
 

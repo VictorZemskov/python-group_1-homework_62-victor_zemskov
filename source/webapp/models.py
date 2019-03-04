@@ -10,7 +10,7 @@ class SoftDeleteManager(models.Manager):
 
 class Movie(models.Model):
     name = models.CharField(max_length=255)
-    category_name = models.ForeignKey('Category', on_delete=models.PROTECT)
+    category_name = models.ManyToManyField('Category', null=True, blank=True)
     description = models.TextField(max_length=2000, null=True, blank=True)
     poster = models.ImageField(upload_to='posters', null=True, blank=True)
     release_date = models.DateField()

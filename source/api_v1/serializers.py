@@ -5,39 +5,39 @@ from webapp.models import Seat
 from webapp.models import Show
 from rest_framework import serializers
 
-class MovieSerializer(serializers.HyperlinkedModelSerializer):
+class MovieSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api_v1:movie-detail')
 
     class Meta:
         model = Movie
-        fields = ('url', 'id', 'name', 'description', 'poster', 'release_date', 'finish_date')
+        fields = ('url', 'id', 'name', 'category_name', 'description', 'poster', 'release_date', 'finish_date')
 
-class CategorySerializer(serializers.HyperlinkedModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api_v1:category-detail')
 
     class Meta:
         model = Category
         fields = ('url', 'id', 'name', 'description')
 
-class HallSerializer(serializers.HyperlinkedModelSerializer):
+class HallSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api_v1:hall-detail')
 
     class Meta:
         model = Hall
         fields = ('url', 'id', 'name')
 
-class SeatSerializer(serializers.HyperlinkedModelSerializer):
+class SeatSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api_v1:seat-detail')
 
     class Meta:
         model = Seat
-        fields = ('url', 'id', 'line', 'position')
+        fields = ('url', 'id', 'hall_name', 'line', 'position')
 
-class ShowSerializer(serializers.HyperlinkedModelSerializer):
+class ShowSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api_v1:show-detail')
 
     class Meta:
         model = Show
-        fields = ('url', 'id', 'start_date', 'finish_date', 'price')
+        fields = ('url', 'id', 'movie_name', 'hall_name', 'start_date', 'finish_date', 'price')
 
 
