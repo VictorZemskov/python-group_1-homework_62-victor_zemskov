@@ -122,8 +122,8 @@ class Book(models.Model):
 class Discount(models.Model):
     name = models.CharField(max_length=255)
     amount = models.DecimalField(max_digits=6, decimal_places=2)
-    date_start = models.DateTimeField(null=True)
-    date_finish = models.DateTimeField(null=True)
+    date_start = models.DateTimeField(blank=True)
+    date_finish = models.DateTimeField(blank=True)
     is_deleted = models.BooleanField(default=False)
 
     objects = SoftDeleteManager()
