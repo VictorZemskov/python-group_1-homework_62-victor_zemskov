@@ -62,12 +62,17 @@ class BookCreateSerializer(serializers.ModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='api_v1:book-detail')
     show_url = serializers.HyperlinkedRelatedField(view_name='api_v1:show-detail', read_only=True, source='show')
 
+
     class Meta:
         model = Book
-        fields = ('url', 'id', 'code', 'show', 'show_url', 'seats', 'status', 'created_at', 'updated_at')
+        fields = ('url', 'id', 'show', 'show_url', 'seats', 'status', 'created_at', 'updated_at')
+
 
 class BookDisplaySerializer(BookCreateSerializer):
     seats = InlineSeatSerializer(many=True, read_only=True)
+    class Meta:
+        model = Book
+        fields =('code', 'url', 'id', 'show', 'show_url', 'seats', 'status', 'created_at', 'updated_at')
 
 
 class DiscountSerializer(serializers.ModelSerializer):

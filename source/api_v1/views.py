@@ -3,6 +3,8 @@ from rest_framework import viewsets
 from api_v1.serializers import MovieCreateSerializer, MovieDisplaySerializer, CategorySerializer, HallSerializer,\
     SeatSerializer, ShowSerializer, BookDisplaySerializer, BookCreateSerializer, TicketSerializer, DiscountSerializer
 
+class NoAuthModelViewSet(viewsets.ModelViewSet):
+    authentication_classes = []
 
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.active().order_by('-release_date')
