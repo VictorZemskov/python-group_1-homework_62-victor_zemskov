@@ -45,7 +45,7 @@ class MovieDetail extends Component {
             {description ? <p>{description}</p> : null}
 
             {/* редактировать фильм */}
-            {/*<NavLink to={'/movies/' + id + '/edit'} className="btn btn-primary mr-2">Edit</NavLink>*/}
+            <NavLink to={'/movies/' + id + '/edit'} className="btn btn-primary mr-2">Edit</NavLink>
 
             {/* назад */}
             <NavLink to='' className="btn btn-primary">Movies</NavLink>
