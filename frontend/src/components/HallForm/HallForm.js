@@ -1,13 +1,4 @@
 import React, {Component} from 'react'
-import axios from "axios";
-import {CATEGORIES_URL} from "../../api-urls";
-
-// из библиотеки react-datepicker
-// стили для дэйтпикера подключены в index.js! без них он не работает!
-import DatePicker from "react-datepicker";
-
-// из библиотеки react-select
-import Select from 'react-select';
 
 
 class HallForm extends Component {
@@ -46,24 +37,7 @@ class HallForm extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     // загружаем категории
-    //     axios.get(CATEGORIES_URL)
-    //         .then(response => {
-    //             const category_name = response.data;
-    //             console.log(category_name);
-    //             // и сохраняем их в state
-    //             this.setState(prevState => {
-    //                 let newState = {...prevState};
-    //                 newState.category_name = category_name;
-    //                 return newState;
-    //             });
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //             console.log(error.response)
-    //         });
-    // }
+
 
     // блокировка отправки формы на время выполнения запроса
     disableSubmit = () => {
@@ -83,25 +57,7 @@ class HallForm extends Component {
         });
     };
 
-    // dateToObject = (date) => {
-    //     return date ? new Date(date) : null;
-    // };
-    //
-    // getCategoryOptions = () => {
-    //     return this.state.category_name.map(category => {
-    //         return {value: category.id, label: category.name}
-    //     });
-    // };
-    //
-    // getCategoryValue = () => {
-    //     if(this.state.category_name.length > 0) {
-    //         return this.state.movie.category_name.map(id => {
-    //             const category = this.state.category_name.find(category => category.id === id);
-    //             return {value: id, label: category.name};
-    //         });
-    //     }
-    //     return [];
-    // };
+
 
     // функция, обновляющая поля в this.state.hall
     updateHallState = (fieldName, value) => {
@@ -121,29 +77,7 @@ class HallForm extends Component {
         this.updateHallState(fieldName, value);
     };
 
-    // обработчик изменения дат
-    // dateChanged = (field, date) => {
-    //     this.updateMovieState(field, date.toISOString().slice(0, 10));
-    // };
 
-    // обработчик изменения select
-    // selectChanged = (field, values) => {
-    //     const category_ids = values.map(item => item.value);
-    //     this.updateMovieState(field, category_ids);
-    // };
-
-    // обработчик выбора файла
-    // fileChanged = (event) => {
-    //     const fileName = event.target.value;
-    //     const fieldName = event.target.name;
-    //     const fileObject = event.target.files.length > 0 ? event.target.files[0] : null;
-    //     this.updateMovieState(fieldName, fileObject);
-    //     this.setState(prevState => {
-    //         let newState = {...prevState};
-    //         newState[fieldName + 'FileName'] = fileName;
-    //         return newState;
-    //     });
-    // };
 
     // отправка формы
     // внутри вызывает onSubmit - переданное действие - со своим фильмом в качестве аргумента.
@@ -163,18 +97,6 @@ class HallForm extends Component {
             // распаковка переменных из state.
             const {posterFileName, submitEnabled} = this.state;
 
-            // форматирование дат для DatePicker'ов
-            // const releaseDateSelected = this.dateToObject(release_date);
-            // const finishDateSelected = this.dateToObject(finish_date);
-
-            // сборка опций для селекта категорий
-            // (опции должны иметь формат {value: "значение", label: "подпись"} )
-            // const selectOptions = this.getCategoryOptions();
-
-            // сборка значений для селекта категорий
-            // (значения должны иметь тот же формат из двух полей, что и опции )
-            // const selectValue = this.getCategoryValue();
-
             return <div>
                 <form onSubmit={this.submitForm}>
                     <div className="form-group">
@@ -182,39 +104,6 @@ class HallForm extends Component {
                         <input type="text" className="form-control" name="name" value={name}
                                onChange={this.inputChanged}/>
                     </div>
-                    {/*<div className="form-group">*/}
-                        {/*<label>Описание</label>*/}
-                        {/*<input type="text" className="form-control" name="description" value={description}*/}
-                               {/*onChange={this.inputChanged}/>*/}
-                    {/*</div>*/}
-                    {/*<div className="form-group">*/}
-                        {/*<label className="font-weight-bold">Дата выхода</label>*/}
-                        {/*<div>*/}
-                            {/*<DatePicker dateFormat="yyyy-MM-dd" selected={releaseDateSelected}*/}
-                                        {/*className="form-control"*/}
-                                        {/*name="release_date"*/}
-                                        {/*onChange={(date) => this.dateChanged('release_date', date)}/>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className="form-group">*/}
-                        {/*<label>Дата завершения проката</label>*/}
-                        {/*<div>*/}
-                            {/*<DatePicker dateFormat="yyyy-MM-dd" selected={finishDateSelected} className="form-control"*/}
-                                        {/*name="finish_date" onChange={(date) => this.dateChanged('finish_date', date)}/>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className="form-group">*/}
-                        {/*<label>Постер</label>*/}
-                        {/*<div>*/}
-                            {/*<input type="file" name="poster" value={posterFileName} onChange={this.fileChanged}/>*/}
-                            {/*{this.state.posterUrl ? <a href={this.state.posterUrl}>Текущий файл</a> : null}*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-                    {/*<div className="form-group">*/}
-                        {/*<label>Категории</label>*/}
-                        {/*<Select options={selectOptions} isMulti={true} name='category_name' value={selectValue}*/}
-                                {/*onChange={(values) => this.selectChanged('category_name', values)}/>*/}
-                    {/*</div>*/}
                     <button disabled={!submitEnabled} type="submit"
                             className="btn btn-primary">Сохранить
                     </button>

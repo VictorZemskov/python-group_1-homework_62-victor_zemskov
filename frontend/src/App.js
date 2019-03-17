@@ -10,12 +10,13 @@ import HallList from "./containers/HallList/HallList";
 import HallDetail from "./containers/HallDetail/HallDetail";
 import HallEdit from "./containers/HallEdit/HallEdit";
 import HallAdd from "./containers/HallAdd/HallAdd";
+import Layout from "./components/Layout/Layout";
 
 class App extends Component {
     render() {
         return (
-            <div className="container">
-                <BrowserRouter>
+            <BrowserRouter>
+                <Layout>
                     <Switch>
                         <Route path="/halls/add" component={HallAdd}/>
                         {/* :id обозначает переменную id */}
@@ -28,8 +29,8 @@ class App extends Component {
                         <Route path="/movies/:id" component={MovieDetail}/>
                         <Route path="/" component={MovieList}/>
                     </Switch>
-                </BrowserRouter>
-            </div>
+                </Layout>
+            </BrowserRouter>
         );
     }
 }

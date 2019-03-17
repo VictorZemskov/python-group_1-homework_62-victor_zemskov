@@ -40,7 +40,7 @@ class HallDetail extends Component {
             <NavLink to={'/halls/' + id + '/edit'} className="btn btn-primary mr-2">Edit</NavLink>
 
             {/* назад */}
-            <NavLink to='/halls' className="btn btn-primary">Halls</NavLink>
+            {/*<NavLink to='/halls' className="btn btn-primary">Halls</NavLink>*/}
         </div>;
     }
 }
