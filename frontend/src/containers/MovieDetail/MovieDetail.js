@@ -52,14 +52,14 @@ class MovieDetail extends Component {
         // входящие в формат URI, в т.ч. & и =.
         const query = encodeURI(`movie_name_id=${movie_nameId}&start_date=${startDate}&finish_date=${finishDate}`);
         axios.get(`${SHOWS_URL}?${query}`).then(response => {
-            console.log(response);
+            console.log(response, response);
             this.setState(prevState => {
                 let newState = {...prevState};
                 newState.shows = response.data;
                 return newState;
             })
         }).catch(error => {
-            console.log(error);
+            console.log(error, 'ERROR');
             console.log(error.response);
         });
     };
