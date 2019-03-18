@@ -23,7 +23,7 @@ class SeatAdmin(admin.ModelAdmin):
 
 class ShowAdmin(admin.ModelAdmin):
     list_display = ['pk', 'movie_name', 'hall_name', 'start_date', 'finish_date', 'price']
-    ordering = ['pk']
+    ordering = ['start_date']
     search_fields = ['movie_name', 'id']
 
 class BookAdmin(admin.ModelAdmin):

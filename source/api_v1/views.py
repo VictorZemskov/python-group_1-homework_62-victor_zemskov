@@ -66,12 +66,15 @@ class ShowViewSet(viewsets.ModelViewSet):
         movie_name_id = self.request.query_params.get('movie_name_id', None)
         start_date = self.request.query_params.get('start_date', None)
         finish_date = self.request.query_params.get('finish_date', None)
+        hall_name_id = self.request.query_params.get('hall_name_id', None)
         if movie_name_id:
             queryset = queryset.filter(movie_name_id=movie_name_id)
         if start_date:
             queryset = queryset.filter(start_date__gte=start_date)
         if finish_date:
             queryset = queryset.filter(finish_date__lte=finish_date)
+        if hall_name_id:
+            queryset = queryset.filter(hall_name_id=hall_name_id)
         return queryset
 
 class BookViewSet(viewsets.ModelViewSet):
