@@ -13,6 +13,9 @@ class MovieList extends Component {
     };
 
     componentDidMount() {
+        // const headers = {
+        //     Authorization: 'Token ' + localStorage.getItem('auth-token')
+        // };
         axios.get(MOVIES_URL)
             .then(response => {console.log(response.data); return response.data;})
             .then(movies => this.setState({movies}))

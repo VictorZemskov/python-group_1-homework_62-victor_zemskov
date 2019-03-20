@@ -2,12 +2,17 @@ from webapp.models import Movie, Category, Hall, Seat, Show, Book, Ticket, Disco
 from rest_framework import viewsets
 from api_v1.serializers import MovieCreateSerializer, MovieDisplaySerializer, CategorySerializer, HallSerializer,\
     SeatSerializer, ShowSerializer, BookDisplaySerializer, BookCreateSerializer, TicketSerializer, DiscountSerializer
-# from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 
-class NoAuthModelViewSet(viewsets.ModelViewSet):
-    authentication_classes = []
+class BaseViewSet(viewsets.ModelViewSet):
+    def get_permissions(self):
+        permissions = super().get_permissions()
+        if self.request.method in ["POST", "DELETE", "PUT", "PATCH"]:
+            permissions.append(IsAuthenticated())
+        return permissions
 
-class MovieViewSet(viewsets.ModelViewSet):
+
+class MovieViewSet(BaseViewSet):
     queryset = Movie.objects.active().order_by('-release_date')
     # filter_backends = (DjangoFilterBackend,)
     # filterset_fields = ('release_date',)
@@ -29,7 +34,7 @@ class MovieViewSet(viewsets.ModelViewSet):
     #         queryset = queryset.filter(release_date__gte=release_date).order_by('-release_date')
     #     return queryset
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(BaseViewSet):
     queryset = Category.objects.active().order_by('pk')
     serializer_class = CategorySerializer
 
@@ -37,7 +42,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
         instance.is_deleted = True
         instance.save()
 
-class HallViewSet(viewsets.ModelViewSet):
+class HallViewSet(BaseViewSet):
     queryset = Hall.objects.active().order_by('pk')
     serializer_class = HallSerializer
 
@@ -45,7 +50,7 @@ class HallViewSet(viewsets.ModelViewSet):
         instance.is_deleted = True
         instance.save()
 
-class SeatViewSet(viewsets.ModelViewSet):
+class SeatViewSet(BaseViewSet):
     queryset = Seat.objects.active().order_by('pk')
     serializer_class = SeatSerializer
 
@@ -53,7 +58,7 @@ class SeatViewSet(viewsets.ModelViewSet):
         instance.is_deleted = True
         instance.save()
 
-class ShowViewSet(viewsets.ModelViewSet):
+class ShowViewSet(BaseViewSet):
     queryset = Show.objects.active().order_by('pk')
     serializer_class = ShowSerializer
 
@@ -77,7 +82,7 @@ class ShowViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(hall_name_id=hall_name_id)
         return queryset
 
-class BookViewSet(viewsets.ModelViewSet):
+class BookViewSet(BaseViewSet):
     queryset = Book.objects.active().order_by('pk')
 
     def get_serializer_class(self):
@@ -90,7 +95,7 @@ class BookViewSet(viewsets.ModelViewSet):
         instance.is_deleted = True
         instance.save()
 
-class TicketViewSet(viewsets.ModelViewSet):
+class TicketViewSet(BaseViewSet):
     queryset = Ticket.objects.active().order_by('pk')
     serializer_class = TicketSerializer
 
@@ -98,7 +103,7 @@ class TicketViewSet(viewsets.ModelViewSet):
         instance.is_deleted = True
         instance.save()
 
-class DiscountViewSet(viewsets.ModelViewSet):
+class DiscountViewSet(BaseViewSet):
     queryset = Discount.objects.active().order_by('pk')
     serializer_class = DiscountSerializer
 

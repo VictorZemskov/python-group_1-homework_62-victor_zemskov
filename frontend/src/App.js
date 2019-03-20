@@ -11,6 +11,9 @@ import HallDetail from "./containers/HallDetail/HallDetail";
 import HallEdit from "./containers/HallEdit/HallEdit";
 import HallAdd from "./containers/HallAdd/HallAdd";
 import Layout from "./components/Layout/Layout";
+import Login from "./containers/Login/Login";
+import Logout from "./containers/Logout/Logout";
+import AuthRoute from "./components/AuthRoute/AuthRoute"
 
 class App extends Component {
     render() {
@@ -23,10 +26,12 @@ class App extends Component {
                         <Route path="/halls/:id/edit" component={HallEdit}/>
                         <Route path="/halls/:id" component={HallDetail}/>
                         <Route path="/halls" component={HallList}/>
-                        <Route path="/movies/add" component={MovieAdd}/>
+                        <AuthRoute path="/movies/add" component={MovieAdd}/>
                         {/* :id обозначает переменную id */}
-                        <Route path="/movies/:id/edit" component={MovieEdit}/>
+                        <AuthRoute path="/movies/:id/edit" component={MovieEdit}/>
                         <Route path="/movies/:id" component={MovieDetail}/>
+                        <Route path="/login" component={Login}/>
+                        <Route path="/logout" component={Logout}/>
                         <Route path="/" component={MovieList}/>
                     </Switch>
                 </Layout>
