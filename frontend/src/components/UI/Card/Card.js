@@ -18,7 +18,7 @@ const Card = props => {
             {props.link ? <NavLink to={props.link.url} className="btn btn-primary">
                 {props.link.text}
             </NavLink> : null}
-            <button type="button" className="btn btn-danger ml-2" onClick={props.click}>Delete</button>
+            {localStorage.getItem('auth-token') ? <button type="button" className="btn btn-danger ml-2" onClick={props.click}>Delete</button> : null}
         </div> : null}
     </div>
 };

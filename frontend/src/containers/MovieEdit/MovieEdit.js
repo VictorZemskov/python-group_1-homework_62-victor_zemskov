@@ -67,7 +67,9 @@ class MovieEdit extends Component {
 
         // отправка запроса
         return axios.put(MOVIES_URL + this.props.match.params.id + '/', formData, {
-            headers: {'Content-Type': 'multipart/form-data'}
+            headers: {'Content-Type': 'multipart/form-data',
+                      'Authorization': 'Token ' + localStorage.getItem('auth-token')
+            }
         })
             .then(response => {
                 // при успешном создании response.data содержит данные фильма

@@ -21,9 +21,9 @@ class App extends Component {
             <BrowserRouter>
                 <Layout>
                     <Switch>
-                        <Route path="/halls/add" component={HallAdd}/>
+                        <AuthRoute path="/halls/add" component={HallAdd}/>
                         {/* :id обозначает переменную id */}
-                        <Route path="/halls/:id/edit" component={HallEdit}/>
+                        <AuthRoute path="/halls/:id/edit" component={HallEdit}/>
                         <Route path="/halls/:id" component={HallDetail}/>
                         <Route path="/halls" component={HallList}/>
                         <AuthRoute path="/movies/add" component={MovieAdd}/>

@@ -16,14 +16,17 @@ class MovieList extends Component {
         // const headers = {
         //     Authorization: 'Token ' + localStorage.getItem('auth-token')
         // };
-        axios.get(MOVIES_URL)
+        axios.get(MOVIES_URL
+        )
             .then(response => {console.log(response.data); return response.data;})
             .then(movies => this.setState({movies}))
             .catch(error => console.log(error));
     }
 
     movieDeleted = (movieId) => {
-        axios.delete(MOVIES_URL + movieId + '/').then(respose => {
+        axios.delete(MOVIES_URL + movieId + '/', {
+            headers: {'Authorization': 'Token ' + localStorage.getItem('auth-token')}
+        }).then(respose => {
             console.log(respose.data);
             this.setState(prevState => {
                 let newState = {...prevState};

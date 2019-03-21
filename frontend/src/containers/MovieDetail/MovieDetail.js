@@ -71,8 +71,10 @@ class MovieDetail extends Component {
         const {name, poster, description, release_date, finish_date, category_name, id} = this.state.movie;
         return <div>
             {/* постер, если есть */}
-            {poster ? <div className='text-center'>
-                <img className="img-fluid rounded" src={poster}/>
+            {poster ? <div className='row'>
+                <div className="col col-xs-10 col-sm-8 col-md-6 col-lg-4 mx-auto">
+                    <img className="img-fluid rounded" src={poster} alt={"постер"}/>
+                </div>
             </div> : null}
 
             {/* название фильма */}

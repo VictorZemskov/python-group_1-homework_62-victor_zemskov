@@ -77,7 +77,7 @@ class ShowViewSet(BaseViewSet):
         if start_date:
             queryset = queryset.filter(start_date__gte=start_date)
         if finish_date:
-            queryset = queryset.filter(finish_date__lte=finish_date)
+            queryset = queryset.filter(start_date__lte=finish_date)
         if hall_name_id:
             queryset = queryset.filter(hall_name_id=hall_name_id)
         return queryset

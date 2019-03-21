@@ -44,7 +44,9 @@ class MovieAdd extends Component {
 
         // отправка запроса
         return axios.post(MOVIES_URL, formData, {
-            headers: {'Content-Type': 'multipart/form-data'}
+            headers: {'Content-Type': 'multipart/form-data',
+                      'Authorization': 'Token ' + localStorage.getItem('auth-token')
+            }
         })
             .then(response => {
                 // при успешном создании response.data содержит данные фильма

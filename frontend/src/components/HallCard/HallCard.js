@@ -18,7 +18,7 @@ const HallCard = props => {
 
 
     // возвращаем (рисуем) карточку с данными из movie и ссылкой.
-    return <Card header={name} link={link} click={onDelete} className='h-100'/>;
+    return <Card link={link} click={onDelete} className='h-100'/>;
 };
 
 
