@@ -4,5 +4,7 @@ const HALL_URL = '/halls/';
 const CATEGORIES_URL = '/categories/';
 const SHOWS_URL = '/shows/';
 const LOGIN_URL = '/login/';
+const REGISTER_URL = '/register/';
+const USER_URL = '/users/';
 
-export {BASE_URL, MOVIES_URL, HALL_URL, CATEGORIES_URL, SHOWS_URL, LOGIN_URL}
+export {BASE_URL, MOVIES_URL, HALL_URL, CATEGORIES_URL, SHOWS_URL, LOGIN_URL, REGISTER_URL, USER_URL}

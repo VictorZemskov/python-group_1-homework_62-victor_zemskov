@@ -14,6 +14,9 @@ import Layout from "./components/Layout/Layout";
 import Login from "./containers/Login/Login";
 import Logout from "./containers/Logout/Logout";
 import AuthRoute from "./components/AuthRoute/AuthRoute"
+import Register from "./containers/Register/Register";
+import UserDetail from "./containers/UserDetail/UserDetail";
+import UserEdit from "./containers/UserEdit/UserEdit";
 
 class App extends Component {
     render() {
@@ -30,8 +33,11 @@ class App extends Component {
                         {/* :id обозначает переменную id */}
                         <AuthRoute path="/movies/:id/edit" component={MovieEdit}/>
                         <Route path="/movies/:id" component={MovieDetail}/>
+                        <AuthRoute path="/users/:id/edit" component={UserEdit}/>
+                        <AuthRoute path="/users/:username" component={UserDetail}/>
                         <Route path="/login" component={Login}/>
                         <Route path="/logout" component={Logout}/>
+                        <Route path="/register" component={Register}/>
                         <Route path="/" component={MovieList}/>
                     </Switch>
                 </Layout>

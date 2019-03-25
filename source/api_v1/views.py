@@ -1,8 +1,30 @@
 from webapp.models import Movie, Category, Hall, Seat, Show, Book, Ticket, Discount
 from rest_framework import viewsets
 from api_v1.serializers import MovieCreateSerializer, MovieDisplaySerializer, CategorySerializer, HallSerializer,\
-    SeatSerializer, ShowSerializer, BookDisplaySerializer, BookCreateSerializer, TicketSerializer, DiscountSerializer
-from rest_framework.permissions import IsAuthenticated
+    SeatSerializer, ShowSerializer, BookDisplaySerializer, BookCreateSerializer, TicketSerializer, DiscountSerializer, UserSerializer, UserUpdateSerializer
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.generics import CreateAPIView
+from rest_framework.permissions import AllowAny
+from django.contrib.auth.models import User
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+
+class LoginView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'username': user.username,
+            'id': user.pk,
+            'is_admin': user.is_superuser,
+            'is_staff': user.is_staff
+        })
+
 
 class BaseViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
@@ -110,3 +132,18 @@ class DiscountViewSet(BaseViewSet):
     def perform_destroy(self, instance):
         instance.is_deleted = True
         instance.save()
+
+class UserCreateView(CreateAPIView):
+    model = User
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]
+
+class UserDetailView(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+
+    model = User
+    serializer_class = UserSerializer
+    serializer_class = UserUpdateSerializer
+    permission_classes = [IsAuthenticated]
+    # permission_classes = [AllowAny]
+
