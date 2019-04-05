@@ -22,4 +22,5 @@ urlpatterns = [
     # path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     path('login/', views.LoginView.as_view(), name='api_token_auth'),
     path('register/', views.UserCreateView.as_view(), name='register'),
+    path('token-login/', views.TokenLoginView.as_view(), name='api_token_re_login'),
 ]

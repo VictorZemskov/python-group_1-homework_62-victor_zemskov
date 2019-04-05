@@ -1,5 +1,6 @@
-import React from 'react'
-import {Redirect, Route} from 'react-router'
+import React from 'react';
+import {Redirect, Route} from 'react-router';
+import {connect} from 'react-redux';
 
 
 // const AuthRoute = (props) => {
@@ -17,7 +18,7 @@ import {Redirect, Route} from 'react-router'
 
 
 const AuthRoute = (props) => {
-    if(localStorage.getItem('auth-token')) {
+    if(props.auth.user_id) {
         return <Route {...props} />
     } else {
         return <Redirect to={{
@@ -27,4 +28,7 @@ const AuthRoute = (props) => {
     }
 };
 
-export default AuthRoute;
+const mapStateToProps = state => ({auth: state.auth});
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps) (AuthRoute);
